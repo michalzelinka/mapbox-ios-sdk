@@ -103,17 +103,17 @@
     
     __block UIImage *image = nil;
 
-    [queue inDatabase:^(FMDatabase *db)
-    {
-        FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?", 
-                                   [NSNumber numberWithShort:zoom], 
-                                   [NSNumber numberWithUnsignedInt:x], 
-                                   [NSNumber numberWithUnsignedInt:y]];
+	[queue inDatabase:^(FMDatabase *db)
+	{
+		FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?",
+								[NSNumber numberWithShort:zoom],
+								[NSNumber numberWithUnsignedInt:x],
+								[NSNumber numberWithUnsignedInt:y]];
 
-        if ([db hadError])
-            image = [RMTileImage errorTile];
+		if ([db hadError] || ![results next])
+			image = [RMTileImage errorTile];
 
-        if ([results next])
+		else
 		{
 			NSData *data = [results dataForColumnIndex:0];
 
@@ -123,8 +123,8 @@
 				image = [UIImage imageWithData:data];
 		}
 
-        [results close];
-    }];
+		[results close];
+	}];
 
     dispatch_async(dispatch_get_main_queue(), ^(void)
     {

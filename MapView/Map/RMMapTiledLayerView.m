@@ -186,7 +186,7 @@
                                 {
                                     // do it all again for this tile, next time synchronously from cache
                                     //
-                                    [self.layer setNeedsDisplayInRect:rect];
+                                    if (rand() % 20 == 0) [self.layer setNeedsDisplayInRect:rect];
                                 });
                             }
                         }
