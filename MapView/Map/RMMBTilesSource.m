@@ -111,52 +111,30 @@
     
     __block UIImage *image = nil;
 
-//<<<<<<< HEAD
-//	[queue inDatabase:^(FMDatabase *db)
-//	{
-//		FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?",
-//								[NSNumber numberWithShort:zoom],
-//								[NSNumber numberWithUnsignedInt:x],
-//								[NSNumber numberWithUnsignedInt:y]];
-//
-//		if ([db hadError] || ![results next])
-//			image = [RMTileImage errorTile];
-//
-//		else
-//		{
-//			NSData *data = [results dataForColumnIndex:0];
-//
-//			if (!data)
-//				image = [RMTileImage errorTile];
-//			else
-//				image = [UIImage imageWithData:data];
-//		}
-//
-//		[results close];
-//	}];
-//=======
-    [queue inDatabase:^(FMDatabase *db)
-    {
-        FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?", 
-                                   [NSNumber numberWithUnsignedLongLong:zoom],
-                                   [NSNumber numberWithUnsignedLongLong:x],
-                                   [NSNumber numberWithUnsignedLongLong:y]];
+	// Tripomatic: Fixed DB error/empty result set handling
 
-        if ([db hadError])
-            image = [RMTileImage errorTile];
+	[queue inDatabase:^(FMDatabase *db)
+	{
+		FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?",
+								[NSNumber numberWithShort:zoom],
+								[NSNumber numberWithUnsignedInt:x],
+								[NSNumber numberWithUnsignedInt:y]];
 
-        [results next];
+		if ([db hadError] || ![results next])
+			image = [RMTileImage errorTile];
 
-        NSData *data = [results dataForColumn:@"tile_data"];
+		else
+		{
+			NSData *data = [results dataForColumn:@"tile_data"];
 
-        if ( ! data)
-            image = [RMTileImage errorTile];
-        else
-            image = [UIImage imageWithData:data];
+			if (!data)
+				image = [RMTileImage errorTile];
+			else
+				image = [UIImage imageWithData:data];
+		}
 
-        [results close];
-    }];
-//>>>>>>> develop
+		[results close];
+	}];
 
     dispatch_async(dispatch_get_main_queue(), ^(void)
     {
