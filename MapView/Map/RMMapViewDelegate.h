@@ -165,6 +165,14 @@ typedef enum : NSUInteger {
 *   @param map The map view. */
 - (void)doubleTapOnLabelForAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map;
 
+/** Tells the delegate that the user tapped the annotation layer's callout view.
+ *
+ *   You can use this method to respond to taps and perform any desired action. For example, if your control displayed additional information about the annotation, you could use this method to present a modal panel with that information.
+ *
+ *   @param annotation The annotation whose callout view was tapped.
+ *   @param map The map view containing the specified annotation. */
+- (void)tapOnCalloutViewForAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map;
+
 /** Tells the delegate that the user tapped one of the annotation layer's accessory buttons.
 *
 *   Accessory views contain custom content and are positioned on either side of the annotation title text. If a view you specify is a descendant of the UIControl class, the map view calls this method as a convenience whenever the user taps your view. You can use this method to respond to taps and perform any actions associated with that control. For example, if your control displayed additional information about the annotation, you could use this method to present a modal panel with that information.
