@@ -1981,8 +1981,11 @@
     contentOffset.x -= offset.width;
     contentOffset.y -= offset.height;
 
-    if (RMPostVersion7)
-        contentOffset.y -= [[[self viewController] topLayoutGuide] length];
+// Tripomatic: Disable possible overlap move here - callout should be called and presented with proper inner rect
+//             so it can correctly calculate the offset
+//
+//    if (RMPostVersion7)
+//        contentOffset.y -= [[[self viewController] topLayoutGuide] length];
 
     [_mapScrollView setContentOffset:contentOffset animated:YES];
 
