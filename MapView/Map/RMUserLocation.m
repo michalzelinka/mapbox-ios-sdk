@@ -77,7 +77,7 @@
                 [self updateTintColor];
         }
 
-        super.layer.zPosition = -MAXFLOAT + 2;
+        super.layer.zPosition = MAXFLOAT - 1;
     }
 
     return super.layer;
