@@ -313,19 +313,21 @@
 
     self.showLogoBug = YES;
 
-    if (RMPostVersion7)
-    {
-        _compassButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage *compassImage = [RMMapView resourceImageNamed:@"Compass.png"];
-        _compassButton.frame = CGRectMake(0, 0, compassImage.size.width, compassImage.size.height);
-        [_compassButton setImage:compassImage forState:UIControlStateNormal];
-        _compassButton.alpha = 0;
-        [_compassButton addTarget:self action:@selector(tappedHeadingCompass:) forControlEvents:UIControlEventTouchUpInside];
-        UIView *container = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width - compassImage.size.width - 5, 5, compassImage.size.width, compassImage.size.height)];
-        container.translatesAutoresizingMaskIntoConstraints = NO;
-        [container addSubview:_compassButton];
-        [self addSubview:container];
-    }
+// Tripomatic: Disable creation of Compass view as we use our own
+//
+//    if (RMPostVersion7)
+//    {
+//        _compassButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        UIImage *compassImage = [RMMapView resourceImageNamed:@"Compass.png"];
+//        _compassButton.frame = CGRectMake(0, 0, compassImage.size.width, compassImage.size.height);
+//        [_compassButton setImage:compassImage forState:UIControlStateNormal];
+//        _compassButton.alpha = 0;
+//        [_compassButton addTarget:self action:@selector(tappedHeadingCompass:) forControlEvents:UIControlEventTouchUpInside];
+//        UIView *container = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width - compassImage.size.width - 5, 5, compassImage.size.width, compassImage.size.height)];
+//        container.translatesAutoresizingMaskIntoConstraints = NO;
+//        [container addSubview:_compassButton];
+//        [self addSubview:container];
+//    }
 
     self.displayHeadingCalibration = YES;
 
