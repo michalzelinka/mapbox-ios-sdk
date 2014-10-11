@@ -76,9 +76,6 @@
             else
                 [self updateTintColor];
         }
-
-        // TODO: Still needed?
-        super.layer.zPosition = MAXFLOAT - 1;
     }
 
     return super.layer;
