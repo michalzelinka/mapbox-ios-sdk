@@ -33,6 +33,8 @@
 @implementation RMShapeAnnotation
 
 @synthesize points=_points;
+@synthesize lineColor=_lineColor;
+@synthesize lineWidth=_lineWidth;
 
 - (id)initWithMapView:(RMMapView *)aMapView coordinate:(CLLocationCoordinate2D)aCoordinate andTitle:(NSString *)aTitle
 {
@@ -53,22 +55,24 @@
 
 - (void)setLineColor:(UIColor *)lineColor
 {
+	_lineColor = lineColor;
     [(RMShape *)[self layer] setLineColor:lineColor];
 }
 
 - (UIColor *)lineColor
 {
-    return ((RMShape *)[self layer]).lineColor;
+	return _lineColor;
 }
 
 - (void)setLineWidth:(CGFloat)lineWidth
 {
+	_lineWidth = lineWidth;
     [(RMShape *)[self layer] setLineWidth:lineWidth];
 }
 
 - (CGFloat)lineWidth
 {
-    return ((RMShape *)[self layer]).lineWidth;
+	return _lineWidth;
 }
 
 - (void)setFillColor:(UIColor *)lineColor
