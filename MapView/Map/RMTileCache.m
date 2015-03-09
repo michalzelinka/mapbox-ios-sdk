@@ -307,7 +307,7 @@
     if ([_backgroundCacheDelegate respondsToSelector:@selector(tileCache:didBeginBackgroundCacheWithCount:forTileSource:)])
         [_backgroundCacheDelegate tileCache:self didBeginBackgroundCacheWithCount:totalTiles forTileSource:_activeTileSource];
 
-    NSUInteger n, xMin, yMax, xMax, yMin;
+    uint32_t n, xMin, yMax, xMax, yMin;
 
     __block NSUInteger progTile = 0;
 
@@ -319,9 +319,9 @@
         xMax = floor(((maxCacheLon + 180.0) / 360.0) * n);
         yMin = floor((1.0 - (logf(tanf(maxCacheLat * M_PI / 180.0) + 1.0 / cosf(maxCacheLat * M_PI / 180.0)) / M_PI)) / 2.0 * n);
 
-        for (NSUInteger x = xMin; x <= xMax; x++)
+        for (uint32_t x = xMin; x <= xMax; x++)
         {
-            for (NSUInteger y = yMin; y <= yMax; y++)
+            for (uint32_t y = yMin; y <= yMax; y++)
             {
                 RMTileCacheDownloadOperation *operation = [[RMTileCacheDownloadOperation alloc] initWithTile:RMTileMake(x, y, zoom)
                                                                                                 forTileSource:_activeTileSource
