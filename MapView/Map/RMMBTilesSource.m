@@ -116,8 +116,8 @@
     {
         FMResultSet *results = [db executeQuery:@"select tile_data from tiles where zoom_level = ? and tile_column = ? and tile_row = ?",
                                 [NSNumber numberWithShort:zoom],
-                                [NSNumber numberWithUnsignedInt:x],
-                                [NSNumber numberWithUnsignedInt:y]];
+                                [NSNumber numberWithUnsignedInteger:x],
+                                [NSNumber numberWithUnsignedInteger:y]];
 
         if ([db hadError] || ![results next])
             image = [RMTileImage errorTile];
