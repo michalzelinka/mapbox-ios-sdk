@@ -54,6 +54,8 @@
 #import "RMAttributionViewController.h"
 
 #import "SMCalloutView.h"
+#import "UIScrollView+BDDRScrollViewAdditions.h"
+#import "BDDROneFingerZoomGestureRecognizer.h"
 
 #pragma mark --- begin constants ----
 
@@ -1331,6 +1333,7 @@
     CGSize contentSize = CGSizeMake(tileSideLength, tileSideLength); // zoom level 1
 
     _mapScrollView = [[RMMapScrollView alloc] initWithFrame:self.bounds];
+	_mapScrollView.bddr_oneFingerZoomEnabled = YES;
     _mapScrollView.delegate = self;
     _mapScrollView.opaque = NO;
     _mapScrollView.backgroundColor = [UIColor clearColor];
@@ -1453,7 +1456,8 @@
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
 {
-    [self registerZoomEventByUser:(scrollView.pinchGestureRecognizer.state == UIGestureRecognizerStateBegan)];
+    [self registerZoomEventByUser:(scrollView.pinchGestureRecognizer.state == UIGestureRecognizerStateBegan ||
+								   scrollView.bddr_oneFingerZoomGestureRecognizer.state == UIGestureRecognizerStateBegan )];
 
     _mapScrollViewIsZooming = YES;
 
@@ -1492,7 +1496,8 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    BOOL wasUserAction = (scrollView.pinchGestureRecognizer.state == UIGestureRecognizerStateChanged);
+    BOOL wasUserAction = (scrollView.pinchGestureRecognizer.state == UIGestureRecognizerStateChanged ||
+						  scrollView.bddr_oneFingerZoomGestureRecognizer.state == UIGestureRecognizerStateChanged);
 
     [self registerZoomEventByUser:wasUserAction];
 
@@ -2956,7 +2961,8 @@
     [CATransaction begin];
 
     // Synchronize marker movement with the map scroll view
-    if (animated && !_mapScrollView.isZooming)
+    if (animated && !_mapScrollView.isZooming &&
+		_mapScrollView.bddr_oneFingerZoomGestureRecognizer.state != UIGestureRecognizerStateChanged)
     {
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
         [CATransaction setAnimationDuration:0.30];
