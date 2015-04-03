@@ -80,6 +80,12 @@
 		B8F3FC610EA2B382004D8F85 /* RMMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F3FC600EA2B382004D8F85 /* RMMapLayer.m */; };
 		B8F3FC640EA2E792004D8F85 /* RMMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = B8F3FC620EA2E792004D8F85 /* RMMarker.h */; };
 		B8F3FC650EA2E792004D8F85 /* RMMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F3FC630EA2E792004D8F85 /* RMMarker.m */; };
+		CD78D97D1ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = CD78D9771ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.h */; };
+		CD78D97E1ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD78D9781ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.m */; };
+		CD78D97F1ACEE8BE007665C7 /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = CD78D9791ACEE8BE007665C7 /* JRSwizzle.h */; };
+		CD78D9801ACEE8BE007665C7 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = CD78D97A1ACEE8BE007665C7 /* JRSwizzle.m */; };
+		CD78D9811ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CD78D97B1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.h */; };
+		CD78D9821ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CD78D97C1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.m */; };
 		D1437B36122869E400888DAE /* RMDBMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D1437B32122869E400888DAE /* RMDBMapSource.m */; };
 		D1437B37122869E400888DAE /* RMDBMapSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D1437B33122869E400888DAE /* RMDBMapSource.h */; };
 		DD07A23817F3AF9800E420B2 /* HeadingAngleMaskSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = DD07A23217F3AF9800E420B2 /* HeadingAngleMaskSmall.png */; };
@@ -264,6 +270,12 @@
 		B8F3FC600EA2B382004D8F85 /* RMMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMapLayer.m; sourceTree = "<group>"; };
 		B8F3FC620EA2E792004D8F85 /* RMMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMarker.h; sourceTree = "<group>"; };
 		B8F3FC630EA2E792004D8F85 /* RMMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMarker.m; sourceTree = "<group>"; };
+		CD78D9771ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDROneFingerZoomGestureRecognizer.h; sourceTree = "<group>"; };
+		CD78D9781ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDDROneFingerZoomGestureRecognizer.m; sourceTree = "<group>"; };
+		CD78D9791ACEE8BE007665C7 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		CD78D97A1ACEE8BE007665C7 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		CD78D97B1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+BDDRScrollViewAdditions.h"; sourceTree = "<group>"; };
+		CD78D97C1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+BDDRScrollViewAdditions.m"; sourceTree = "<group>"; };
 		D1437B32122869E400888DAE /* RMDBMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDBMapSource.m; sourceTree = "<group>"; };
 		D1437B33122869E400888DAE /* RMDBMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDBMapSource.h; sourceTree = "<group>"; };
 		DD07A23217F3AF9800E420B2 /* HeadingAngleMaskSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HeadingAngleMaskSmall.png; path = Map/Resources/HeadingAngleMaskSmall.png; sourceTree = "<group>"; };
@@ -602,6 +614,20 @@
 			name = "Coordinate Systems";
 			sourceTree = "<group>";
 		};
+		CD78D9761ACEE8BE007665C7 /* BDDRScrollViewAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				CD78D9771ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.h */,
+				CD78D9781ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.m */,
+				CD78D9791ACEE8BE007665C7 /* JRSwizzle.h */,
+				CD78D97A1ACEE8BE007665C7 /* JRSwizzle.m */,
+				CD78D97B1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.h */,
+				CD78D97C1ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.m */,
+			);
+			name = BDDRScrollViewAdditions;
+			path = ../../Mapbox/MapView/Map/BDDRScrollViewAdditions;
+			sourceTree = "<group>";
+		};
 		DD3BEF71159134E0007892D8 /* Attribution */ = {
 			isa = PBXGroup;
 			children = (
@@ -696,6 +722,7 @@
 		DD932BC2165C294100D69D49 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				CD78D9761ACEE8BE007665C7 /* BDDRScrollViewAdditions */,
 				B8474B8C0EB40094006A0BC1 /* FMDB */,
 				DDC4BEEE152E3DEC00089409 /* GRMustache */,
 				DDDFF7FE165D5BA200A9D877 /* Proj4 */,
@@ -754,6 +781,7 @@
 				16EC85D4133CA6C300219947 /* RMAbstractWebMapSource.h in Headers */,
 				DD56B9581961E23F00706C67 /* FMResultSet.h in Headers */,
 				16EC85D6133CA6C300219947 /* RMCacheObject.h in Headers */,
+				CD78D97D1ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.h in Headers */,
 				160EEDAF13D41DEC007C5501 /* RMAnnotation.h in Headers */,
 				DD2B375514CF8197008DE8CB /* RMMBTilesSource.h in Headers */,
 				DD56B9551961E23F00706C67 /* FMDatabaseQueue.h in Headers */,
@@ -783,8 +811,10 @@
 				96492C400FA8AD3400EBA6D2 /* RMGlobalConstants.h in Headers */,
 				B1EB26C610B5D8E6009F8658 /* RMNotifications.h in Headers */,
 				D1437B37122869E400888DAE /* RMDBMapSource.h in Headers */,
+				CD78D9811ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.h in Headers */,
 				1606C9FE13D86BA400547581 /* RMOpenCycleMapSource.h in Headers */,
 				16FAB66413E03D55002F4E1C /* RMQuadTree.h in Headers */,
+				CD78D97F1ACEE8BE007665C7 /* JRSwizzle.h in Headers */,
 				160E535713FBDB48004F82F9 /* RMMapTiledLayerView.h in Headers */,
 				1609AF8E14068B09008344B7 /* RMMapOverlayView.h in Headers */,
 				16128CF5148D295300C23C0E /* RMOpenSeaMapSource.h in Headers */,
@@ -940,6 +970,7 @@
 				B8474BA50EB40094006A0BC1 /* RMDatabaseCache.m in Sources */,
 				126693040EB76C0B00E002D5 /* RMConfiguration.m in Sources */,
 				23A0AAE90EB90A99003A4521 /* RMFoundation.c in Sources */,
+				CD78D9821ACEE8BE007665C7 /* UIScrollView+BDDRScrollViewAdditions.m in Sources */,
 				D1437B36122869E400888DAE /* RMDBMapSource.m in Sources */,
 				25757F501291C8640083D504 /* RMCircle.m in Sources */,
 				16EC85D3133CA6C300219947 /* RMAbstractMercatorTileSource.m in Sources */,
@@ -948,6 +979,7 @@
 				160EEDB013D41DEC007C5501 /* RMAnnotation.m in Sources */,
 				1606C9FF13D86BA400547581 /* RMOpenCycleMapSource.m in Sources */,
 				16FAB66513E03D55002F4E1C /* RMQuadTree.m in Sources */,
+				CD78D97E1ACEE8BE007665C7 /* BDDROneFingerZoomGestureRecognizer.m in Sources */,
 				160E535813FBDB48004F82F9 /* RMMapTiledLayerView.m in Sources */,
 				1609AF8F14068B09008344B7 /* RMMapOverlayView.m in Sources */,
 				DD56B9561961E23F00706C67 /* FMDatabaseQueue.m in Sources */,
@@ -956,6 +988,7 @@
 				DD2B375614CF8197008DE8CB /* RMMBTilesSource.m in Sources */,
 				DD98B6FB14D76B930092882F /* RMMapboxSource.m in Sources */,
 				DD8CDB4B14E0507100B73EB9 /* RMMapQuestOSMSource.m in Sources */,
+				CD78D9801ACEE8BE007665C7 /* JRSwizzle.m in Sources */,
 				1607499614E120A100D535F5 /* RMGenericMapSource.m in Sources */,
 				16FFF2CC14E3DBF700A170EC /* RMMapQuestOpenAerialSource.m in Sources */,
 				DDC4BEF2152E3FAE00089409 /* RMInteractiveSource.m in Sources */,
