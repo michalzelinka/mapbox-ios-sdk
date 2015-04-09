@@ -157,23 +157,23 @@
 
 - (BOOL)canPreventGestureRecognizer:(UIGestureRecognizer *)preventedGestureRecognizer {
 	return YES;
-	if ([preventedGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
-		return NO;
-	else
-		return [super canPreventGestureRecognizer:preventedGestureRecognizer];
+//	if ([preventedGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
+//		return NO;
+//	else
+//		return [super canPreventGestureRecognizer:preventedGestureRecognizer];
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 - (BOOL)shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
 	return YES;
-	if ([otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
-		return YES;
-	else {
-		if ([[self class] instancesRespondToSelector:_cmd])
-			return [super shouldBeRequiredToFailByGestureRecognizer:otherGestureRecognizer];
-		else
-			return NO;
-	}
+//	if ([otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+//		return YES;
+//	else {
+//		if ([[self class] instancesRespondToSelector:_cmd])
+//			return [super shouldBeRequiredToFailByGestureRecognizer:otherGestureRecognizer];
+//		else
+//			return NO;
+//	}
 }
 #endif
 
