@@ -1622,7 +1622,7 @@
         _accumulatedDelta.x += delta.x;
         _accumulatedDelta.y += delta.y;
 
-        if (fabsf(_accumulatedDelta.x) < kZoomRectPixelBuffer && fabsf(_accumulatedDelta.y) < kZoomRectPixelBuffer)
+        if (ABS(_accumulatedDelta.x) < kZoomRectPixelBuffer && ABS(_accumulatedDelta.y) < kZoomRectPixelBuffer)
         {
             [_overlayView moveLayersBy:_accumulatedDelta];
             [self performSelector:@selector(correctPositionOfAllAnnotations) withObject:nil afterDelay:0.1];
@@ -1718,7 +1718,7 @@
         {
             [self zoomInToNextNativeZoomAt:[self convertPoint:self.center fromView:self.superview] animated:YES];
         }
-        else if (self.userTrackingMode != RMUserTrackingModeNone && fabsf(aPoint.x - [self coordinateToPixel:self.userLocation.location.coordinate].x) < 75 && fabsf(aPoint.y - [self coordinateToPixel:self.userLocation.location.coordinate].y) < 75)
+        else if (self.userTrackingMode != RMUserTrackingModeNone && ABS(aPoint.x - [self coordinateToPixel:self.userLocation.location.coordinate].x) < 75 && ABS(aPoint.y - [self coordinateToPixel:self.userLocation.location.coordinate].y) < 75)
         {
             [self zoomInToNextNativeZoomAt:[self coordinateToPixel:self.userLocation.location.coordinate] animated:YES];
         }
@@ -3554,7 +3554,7 @@
         CGPoint mapCenterPoint    = [self convertPoint:self.center fromView:self.superview];
         CGPoint userLocationPoint = [self mapPositionForAnnotation:self.userLocation];
 
-        if (fabsf(userLocationPoint.x - mapCenterPoint.x) > 1.0 || fabsf(userLocationPoint.y - mapCenterPoint.y) > 1.0)
+        if (ABS(userLocationPoint.x - mapCenterPoint.x) > 1.0 || ABS(userLocationPoint.y - mapCenterPoint.y) > 1.0)
         {
             if (round(_zoom) >= 10)
             {
