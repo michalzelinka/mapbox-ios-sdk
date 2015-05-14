@@ -53,7 +53,7 @@
 
 - (id)init
 {
-    return [self initWithReferenceURL:[NSURL fileURLWithPath:[RMMapView pathForBundleResourceNamed:kMapboxPlaceholderMapID ofType:@"json"]]];
+    return [self initWithMapID:kMapboxPlaceholderMapID];
 }
 
 - (id)initWithMapID:(NSString *)mapID
@@ -70,6 +70,8 @@
 {
     if (self = [super init])
     {
+        NSAssert([[[RMConfiguration sharedInstance] accessToken] length], @"an access token is required to use Mapbox map tiles");
+
         _dataQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
 
         _infoDictionary = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:[tileJSON dataUsingEncoding:NSUTF8StringEncoding]
@@ -83,7 +85,8 @@
         if ([_infoDictionary[@"id"] hasPrefix:@"examples."])
             RMLog(@"Using watermarked example map ID %@. Please go to https://mapbox.com and create your own map style.", _infoDictionary[@"id"]);
 
-        _uniqueTilecacheKey = [NSString stringWithFormat:@"Mapbox-%@%@", _infoDictionary[@"id"], (_infoDictionary[@"version"] ? [@"-" stringByAppendingString:_infoDictionary[@"version"]] : @"")];
+        _uniqueTilecacheKey = [NSString stringWithFormat:@"Mapbox-%@%@%@", _infoDictionary[@"id"], (_infoDictionary[@"version"] ? [@"-" stringByAppendingString:_infoDictionary[@"version"]] : @""),
+            ([RMMapboxSource isUsingLargeTiles] ? @"-512" : @"")];
 
         id dataObject = nil;
         
@@ -155,13 +158,26 @@
     id dataObject = nil;
     
     if ([[referenceURL pathExtension] isEqualToString:@"jsonp"])
-        referenceURL = [NSURL URLWithString:[[referenceURL absoluteString] stringByReplacingOccurrencesOfString:@".jsonp" 
+    {
+        referenceURL = [NSURL URLWithString:[[referenceURL absoluteString] stringByReplacingOccurrencesOfString:@".jsonp"
                                                                                                      withString:@".json"
                                                                                                         options:NSAnchoredSearch & NSBackwardsSearch
                                                                                                           range:NSMakeRange(0, [[referenceURL absoluteString] length])]];
-    
-    if ([[referenceURL pathExtension] isEqualToString:@"json"] && (dataObject = [NSString brandedStringWithContentsOfURL:referenceURL encoding:NSUTF8StringEncoding error:nil]) && dataObject)
+    }
+
+    NSError *error = nil;
+
+    if ([[referenceURL pathExtension] isEqualToString:@"json"] && (dataObject = [NSString brandedStringWithContentsOfURL:referenceURL encoding:NSUTF8StringEncoding error:&error]) && dataObject)
+    {
+        if (error && [error.domain isEqual:NSURLErrorDomain] && error.code == -1012)
+        {
+#ifdef DEBUG
+            NSAssert(![[dataObject lowercaseString] hasSuffix:@"invalid token\"}"], @"invalid token in use");
+#endif
+        }
+
         return [self initWithTileJSON:dataObject enablingDataOnMapView:mapView];
+    }
 
     return nil;
 }
@@ -183,10 +199,8 @@
 
 - (NSURL *)canonicalURLForMapID:(NSString *)mapID
 {
-    NSString *version     = ([[RMConfiguration configuration] accessToken] ? @"v4" : @"v3");
-    NSString *accessToken = ([[RMConfiguration configuration] accessToken] ? [@"&access_token=" stringByAppendingString:[[RMConfiguration configuration] accessToken]] : @"");
-
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://api.tiles.mapbox.com/%@/%@.json?secure%@", version, mapID, accessToken]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://api.tiles.mapbox.com/v4/%@.json?secure%@", mapID,
+                [@"&access_token=" stringByAppendingString:[[RMConfiguration sharedInstance] accessToken]]]];
 }
 
 - (NSURL *)tileJSONURL
@@ -355,9 +369,19 @@
     return roundf(([self maxZoom] + [self minZoom]) / 2);
 }
 
++ (BOOL)isUsingLargeTiles
+{
+    return ([[UIScreen mainScreen] scale] > 1.0);
+}
+
 - (NSString *)uniqueTilecacheKey
 {
     return _uniqueTilecacheKey;
+}
+
+- (NSUInteger)tileSideLength
+{
+    return ([RMMapboxSource isUsingLargeTiles] ? 512 : kMapboxDefaultTileSize);
 }
 
 - (NSString *)shortName

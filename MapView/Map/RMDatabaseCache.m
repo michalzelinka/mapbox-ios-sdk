@@ -111,8 +111,6 @@
     [_writeQueue setMaxConcurrentOperationCount:1];
     _writeQueueLock = [NSRecursiveLock new];
 
-	RMLog(@"Opening database at %@", path);
-
     _queue = [FMDatabaseQueue databaseQueueWithPath:path];
 
 	if (!_queue)
@@ -246,9 +244,11 @@
 
 - (void)addImage:(UIImage *)image forTile:(RMTile)tile withCacheKey:(NSString *)aCacheKey
 {
-    // TODO: Converting the image here (again) is not so good...
-	NSData *data = UIImagePNGRepresentation(image);
+    [self addDiskCachedImageData:UIImagePNGRepresentation(image) forTile:tile withCacheKey:aCacheKey];
+}
 
+- (void)addDiskCachedImageData:(NSData *)data forTile:(RMTile)tile withCacheKey:(NSString *)aCacheKey
+{
     if (_capacity != 0)
     {
         NSUInteger tilesInDb = [self count];
@@ -308,7 +308,7 @@
 
     [_queue inDatabase:^(FMDatabase *db)
      {
-         FMResultSet *results = [db executeQuery:@"SELECT COUNT(tile_hash) FROM ZCACHE"];
+         FMResultSet *results = [db executeQuery:@"SELECT COUNT(*) FROM ZCACHE"];
 
          if ([results next])
              count = [results intForColumnIndex:0];
