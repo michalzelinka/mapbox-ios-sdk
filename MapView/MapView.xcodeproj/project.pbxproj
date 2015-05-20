@@ -844,7 +844,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MapView" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1075,7 +1075,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = iphoneos8.0;
+				SDKROOT = iphoneos8.1;
 				SEPARATE_STRIP = YES;
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1111,7 +1111,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = iphoneos8.0;
+				SDKROOT = iphoneos8.1;
 				SEPARATE_STRIP = YES;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
@@ -1155,7 +1155,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
