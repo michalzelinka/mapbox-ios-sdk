@@ -473,6 +473,7 @@
     [_zoomDelegateQueue cancelAllOperations];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_mapScrollView removeObserver:self forKeyPath:@"contentOffset"];
+	_mapScrollView.delegate = nil;
     [_tileSourcesContainer cancelAllDownloads];
     _locationManager.delegate = nil;
     [_locationManager stopUpdatingLocation];
@@ -3140,10 +3141,10 @@
             // Sort user location annotations below all.
             //
             if (   annotation1.isUserLocationAnnotation && ! annotation2.isUserLocationAnnotation)
-                return NSOrderedAscending;
+                return NSOrderedDescending;
 
             if ( ! annotation1.isUserLocationAnnotation &&   annotation2.isUserLocationAnnotation)
-                return NSOrderedDescending;
+                return NSOrderedAscending;
 
             // Amongst user location annotations, sort properly.
             //
